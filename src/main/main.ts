@@ -30,6 +30,14 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
+ipcMain.on('close', () => {
+  app.quit();
+});
+
+ipcMain.on('minimize', () => {
+  mainWindow?.minimize();
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -73,8 +81,10 @@ const createWindow = async () => {
     width: 428,
     height: 557,
     resizable: false,
+    frame: false,
     icon: getAssetPath('icon.png'),
     webPreferences: {
+      nodeIntegrationInWorker: true,
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),

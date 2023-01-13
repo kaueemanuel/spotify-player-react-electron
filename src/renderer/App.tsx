@@ -1,10 +1,15 @@
 import React from 'react';
+import TopBar from 'components/top-bar/top-bar';
 
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 function Hello() {
-  return <div>hello world</div>;
+  return (
+    <div>
+      <TopBar />
+    </div>
+  );
 }
 
 export default function App() {
