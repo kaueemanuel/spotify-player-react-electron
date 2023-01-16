@@ -1,9 +1,15 @@
 import React from 'react';
 
-// import { Container } from './styles';
-import './top-bar.styles.css';
+import { Close, Remove } from '@material-ui/icons';
+import {
+  Button,
+  Container,
+  ContainerTab,
+  Content,
+  MinimizeButton,
+} from './top-bar.styles';
 
-const TopBar: React.FC = () => {
+const TopBar = ({ children }: { children: React.ReactNode }) => {
   const closeWindow = () => {
     window.electron.ipcRenderer.sendMessage('close');
   };
@@ -11,16 +17,19 @@ const TopBar: React.FC = () => {
     window.electron.ipcRenderer.sendMessage('minimize');
   };
   return (
-    <div className="container">
-      <div>
-        <button type="button" onClick={minimizeWindow}>
-          -
-        </button>
-        <button type="button" onClick={closeWindow}>
-          X
-        </button>
-      </div>
-    </div>
+    <Container>
+      <ContainerTab>
+        <div>
+          <MinimizeButton type="button" onClick={minimizeWindow}>
+            <Remove style={{ height: '22px' }} />
+          </MinimizeButton>
+          <Button type="button" onClick={closeWindow}>
+            <Close style={{ height: '22px' }} />
+          </Button>
+        </div>
+      </ContainerTab>
+      <Content>{children}</Content>
+    </Container>
   );
 };
 
