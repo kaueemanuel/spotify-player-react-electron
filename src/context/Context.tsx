@@ -1,8 +1,8 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useMemo } from 'react';
 import { getLocalStorage, setLocalStorage } from '../utils/storage';
 
 export interface IContextData {
-  token: any;
+  credentials: any;
   user: any;
 }
 
@@ -12,7 +12,7 @@ export interface IContext {
 }
 
 const ContextInicalDataValues = {
-  token: undefined,
+  credentials: undefined,
   user: undefined,
 };
 
@@ -36,12 +36,12 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     setLocalStorage('context', context);
   }, [context]);
 
-  return (
-    // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <Context.Provider value={{ context, setContext }}>
-      {children}
-    </Context.Provider>
+  const contextMemo = useMemo(
+    () => ({ context, setContext }),
+    [context, setContext]
   );
+
+  return <Context.Provider value={contextMemo}>{children}</Context.Provider>;
 };
 
 export default ContextProvider;

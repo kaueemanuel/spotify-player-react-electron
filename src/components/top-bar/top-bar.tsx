@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { Close, Remove } from '@material-ui/icons';
+import { Context } from 'context/Context';
 import {
   Button,
   Container,
@@ -8,8 +9,13 @@ import {
   Content,
   MinimizeButton,
 } from './top-bar.styles';
+import UserInfo from './user-info/user-info';
 
 const TopBar = ({ children }: { children: React.ReactNode }) => {
+  const {
+    context: { user },
+  } = useContext(Context);
+
   const closeWindow = () => {
     window.electron.ipcRenderer.sendMessage('close');
   };
@@ -18,7 +24,8 @@ const TopBar = ({ children }: { children: React.ReactNode }) => {
   };
   return (
     <Container>
-      <ContainerTab>
+      <ContainerTab style={{ justifyContent: user ? 'space-between' : 'end' }}>
+        {user && <UserInfo user={user} />}
         <div>
           <MinimizeButton type="button" onClick={minimizeWindow}>
             <Remove style={{ height: '22px' }} />

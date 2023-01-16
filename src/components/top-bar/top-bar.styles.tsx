@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const ContainerTab = styled.div`
   display: flex;
-  align-items: top;
+  align-items: center;
   justify-content: end;
   width: 100%;
   background-color: var(--bg-color);
@@ -36,7 +36,7 @@ export const Button = styled.button`
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  padding: 8px 9px 4px 9px;
+  padding: 12px 9px 8px 9px;
   transition: ease-in 0.1s;
   border-radius: 0px;
 

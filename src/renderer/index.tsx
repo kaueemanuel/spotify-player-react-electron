@@ -1,3 +1,4 @@
+import ContextProvider from 'context/Context';
 import 'material-symbols';
 
 import React from 'react';
@@ -7,7 +8,11 @@ import App from './App';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-root.render(<App />);
+root.render(
+  <ContextProvider>
+    <App />
+  </ContextProvider>
+);
 
 // calling IPC exposed from preload script
 window.electron.ipcRenderer.once('ipc-example', (arg) => {
