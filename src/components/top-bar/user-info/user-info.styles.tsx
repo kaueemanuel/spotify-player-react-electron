@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: var(--bg-color-seconday);
+  background-color: var(--bg-color-secondary);
   cursor: pointer;
   display: flex;
   justify-content: space-around;

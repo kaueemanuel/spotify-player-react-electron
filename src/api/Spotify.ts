@@ -96,3 +96,17 @@ export const getUser = async () => {
 
   return response;
 };
+export const getPlaybackState = async () => {
+  const response = clientAxios.get('me/player');
+
+  return response;
+};
+export const setPausePlayback = async ({
+  device_id,
+}: {
+  device_id: string;
+}) => {
+  const response = clientAxios.put(`me/player/pause?device_id=${device_id}`);
+
+  return response;
+};

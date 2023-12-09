@@ -4,6 +4,7 @@ import { getLocalStorage, setLocalStorage } from '../utils/storage';
 export interface IContextData {
   credentials: any;
   user: any;
+  playbackState: any;
 }
 
 export interface IContext {
@@ -14,6 +15,7 @@ export interface IContext {
 const ContextInicalDataValues = {
   credentials: undefined,
   user: undefined,
+  playbackState: undefined,
 };
 
 export const ContextInicalValues: IContext = {

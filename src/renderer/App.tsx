@@ -7,15 +7,17 @@ import { Context } from 'context/Context';
 import './Fonts.css';
 import useServices from 'hooks/use-services';
 import { getAccessToken, getRefreshAccessToken, getUser } from 'api/Spotify';
+import Player from 'components/player/player';
 import GlobalStyle from './Global.styles';
+import { Container, ContainerRoutes } from './App.styles';
 
 function Hello() {
-  return <div style={{ color: 'white' }}>Bora codar</div>;
+  return <div style={{ color: 'white' }} />;
 }
 
 export default function App() {
   const {
-    context: { credentials },
+    context: { credentials, playbackState },
     setContext,
   } = useContext(Context);
   const [{ value }, getToken] = useServices(getAccessToken);
@@ -56,7 +58,7 @@ export default function App() {
     ) {
       timeoutRefresToken = setInterval(() => {
         getRefreshToken({ refresh_token: credentials?.refresh_token });
-      }, credentials.expires_in * 1000);
+      }, credentials.expires_in * 100);
     }
 
     return () => {
@@ -91,11 +93,18 @@ export default function App() {
         {!credentials ? (
           <Login />
         ) : (
-          <Router>
-            <Routes>
-              <Route path="/" element={<Hello />} />
-            </Routes>
-          </Router>
+          <Container>
+            <ContainerRoutes
+              background={playbackState?.item?.album?.images[0]?.url}
+            >
+              <Router>
+                <Routes>
+                  <Route path="/" element={<Hello />} />
+                </Routes>
+              </Router>
+            </ContainerRoutes>
+            <Player />
+          </Container>
         )}
       </TopBar>
     </React.StrictMode>

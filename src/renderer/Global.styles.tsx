@@ -2,19 +2,24 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   :root {
-      --font-color: rgb(209, 209, 209);
-      --font-color-accent: rgb(255, 255, 255);
+      --font-color: #9D9D9D;
+      --font-color-accent: #DEDEDE;
       --bg-color: #181818;
-      --bg-color-seconday: #292929;
+      --bg-color-secondary: #292929;
   }
 
   [data-theme="light"] {
       --font-color: #e1e1ff;
       --font-color-accent: rgb(209, 209, 209);
       --bg-color: #161625;
-      --bg-color-seconday: #333333;
+      --bg-color-secondary: #333333;
   }
 
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
   body {
     margin: 0;
